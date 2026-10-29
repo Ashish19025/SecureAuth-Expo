@@ -1,56 +1,90 @@
-# Welcome to your Expo app 👋
+# SecureAuth Expo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+SecureAuth Expo is a cross-platform authentication starter built with Expo
+and React Native. It provides email/password and OAuth sign-in through Clerk,
+then synchronizes authenticated users with an Express and MongoDB backend.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Email/password sign-up and sign-in
+- Email verification during registration
+- Google, Facebook, GitHub, and Apple OAuth flows
+- Secure Clerk token storage with Expo SecureStore
+- Protected routes using Expo Router
+- Backend user synchronization at `POST /api/users/sync`
+- Request validation, rate limiting, Helmet, and Morgan logging
 
-   ```bash
-   npm install
-   ```
+## Project structure
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+.
+├── src/                 # Expo mobile application
+│   ├── app/             # Expo Router screens and auth routes
+│   ├── components/      # Reusable form and OAuth components
+│   └── services/        # API clients
+└── Backend/             # Express API and MongoDB models
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Requirements
 
-### Other setup steps
+- Node.js 20 or newer
+- A Clerk application
+- MongoDB (local or hosted)
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Configuration
 
-## Learn more
+Create a `.env` file in the project root:
 
-To learn more about developing your project with Expo, look at the following resources:
+```env
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_publishable_key
+EXPO_PUBLIC_BACKEND_URL=http://localhost:5000
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Create a separate `Backend/.env` file:
 
-## Join the community
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/secureauth
+CLERK_SECRET_KEY=sk_test_your_secret_key
+```
 
-Join our community of developers creating universal apps.
+For a physical device, set `EXPO_PUBLIC_BACKEND_URL` to the machine's
+local-network IP address instead of `localhost`. Configure the OAuth providers
+and redirect URLs in the Clerk dashboard before testing social sign-in.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Getting started
+
+Install the mobile app dependencies and start Expo:
+
+```bash
+npm install
+npx expo start
+```
+
+In another terminal, install and start the backend:
+
+```bash
+cd Backend
+npm install
+npm run dev
+```
+
+Use Expo Go, an Android emulator, an iOS simulator, or a development build
+to open the app. The backend listens on port `5000`.
+
+## Useful commands
+
+| Command | Description |
+| --- | --- |
+| `npm run start` | Start the Expo development server |
+| `npm run android` | Run the app on Android |
+| `npm run ios` | Run the app on iOS |
+| `npm run web` | Run the web build |
+| `npm run lint` | Check the Expo project |
+| `cd Backend && npm run dev` | Start the API with watch mode |
+
+## Authentication flow
+
+Clerk manages registration, login, verification, and OAuth sessions in the
+mobile app. After a successful login, the app sends the authenticated user's
+details to the backend with a Clerk bearer token. The API verifies that token,
+creates or updates the matching MongoDB user, and records the latest login.
