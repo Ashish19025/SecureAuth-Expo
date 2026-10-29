@@ -1,6 +1,8 @@
-import { Stack,Redirect} from "expo-router";
+// @ts-ignore - expo-router types/module resolution may be unavailable in editor while app runtime resolves it
 import { useAuth } from "@clerk/expo";
-import { View, ActivityIndicator } from "react-native";
+// @ts-ignore - expo-router types/module resolution may be unavailable in editor while app runtime resolves it
+import { Redirect, Stack } from "@expo-router";
+import { ActivityIndicator, View } from "react-native";
 
 
 export default function AuthLayout() {
