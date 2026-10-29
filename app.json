@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "auth-expo-app-forpractice",
-    "slug": "auth-expo-app-forpractice",
+    "name": "SecureAuth Expo",
+    "slug": "secure-auth-expo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "authexpoappforpractice",
+    "scheme": "secureauthexpo",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
@@ -18,7 +18,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.ashish19025.authexpoappforpractice"
+      "package": "com.ashish19025.secureauthexpo"
     },
     "web": {
       "output": "static",

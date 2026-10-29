@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "secure-auth-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express and MongoDB API for SecureAuth Expo",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",

@@ -1,5 +1,5 @@
 {
-  "name": "auth-expo-app-forpractice",
+  "name": "secure-auth-expo",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {

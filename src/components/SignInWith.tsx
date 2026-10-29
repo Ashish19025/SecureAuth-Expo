@@ -35,7 +35,7 @@ export default function SignInWith({ strategy }: SignInWithProps) {
   const onPress = async () => {
     try {
       const redirectUrl = AuthSession.makeRedirectUri({
-        scheme: 'authexpoappforpractice',
+        scheme: 'secureauthexpo',
         path: 'continue',
       });
 
